@@ -1,0 +1,101 @@
+Document Classification with Distributions of Word Vectors
+==========================================================
+
+How to represent words is one of the core problems in Natural Language Process. One conventional representation is one hot
+encoding where a sparse vector of size |V| is used to represent a word in which all the dimensions are zeros except one
+that corresponds to the word. Pitfalls of this simple representation are it is discrete, high-dimensional, does not embed
+any semantic relationships among words and also cause the well-known smoothness problem in language modeling. In an alternative
+approach words are mapped to a low-dimensional continuous space where relevant words are mapped close to each other. Depending on the
+model objectives and the task at hand the 'relevance' might be in the sense of semantic meanings, syntactic roles, sentimental polarities or any other 
+such things.
+Word vectors have several advantages:
+First: the dimension of the vector is often much lower than the one-hot encoding leading to model efficiency.
+Second: The word vector space is continuous, offering the possibility to model texts using continuous models.
+Third: The similarity/ dissimilarity or other relationships among words are embedded in their word vectors, which can be manipulated easily
+for the sake of computation and one can easily find the aggregrated semantics for word collections in higher levels such as paragraphs
+and documents.
+For all these reasons word vectors have been widely adopted by the NLP community and have been applied to a multitude of text
+processing tasks.
+
+
+Model chosen for document classification with distribution of word vectors:
+----------------------------------------------------------------------------
+
+A simple and efficient W2V model skip-gram model is chosen
+-- training objective (fake objective) for skip-gram model is to predict the left and right neighbours given a particular word.
+-- On the process of this prediction we generate the W2V matrice which comprises of word vectors for every word in the vocabulary.
+
+From Word Vector Document Vector:
+---------------------------------
+Vector Space Model: Represents a document as a raw TF-IDF vector
+LDA based approach: represents a document as an image of the document's raw vector on a topic group 
+Due to the semantic interpolation of the topics, LDA can learn semantic relationships among words and thus usually delivers considerably 
+good performance on document classification.
+
+
+Document vector intuition: Meaning of a document can be cosidered as an aggregation of the meanings of the words in that document. So document vectors
+can be derived from meanings of word vectors.
+
+*********************************************************************************
+********** Fundamental Difference between LDA based approach and W2V: ***********
+*********************************************************************************
+- LDA model learns the semantic groups or topics from a collection of documents, so the topics are specific to the training corpus.
+- W2V model learns the semantic embedding for each word, independent of document or corpus and so it is more 'general'
+ for all the documents of a language.
+- W2V based document vector generation can be considered as bottom up approach as it generates vectors in a bottom up fashion start from word
+vectors.
+- LDA based document representation can be considered as a top down approach which generates document representation from a set of global topics.
+- W2V based approach, even if represented by the simple average pooling, can deliver highly competitive performance. Actually it outperforms LDA in classification
+tasks in many real world applications.
+
+
+Document Vector Generation by average pooling: The document vector is the centroid of all the word vectors involved
+ - pitfalls: distribution of word vectors of a document is overlooked.
+
+
+CLASSIFICATION APPROACH BASED ON WORD VECTOR DISTRIBUTION:
+----------------------------------------------------------
+1. Ignore the document boundary and model the word vectors for each class as a GMM (Gaussian Mixture model); The classification is then cast to a task of maximum posterior 
+  ---- No documents vector derived in this model. It is a purely generative approach and the classification is based on CSGMM directly.
+2. Semantic Space Allocation (SSA)
+  ---- A document d is represented by posterior probabilities that d belongs to GMM components:
+       v(d) =  Transpose([P(1/d), P(2/d), ..... P(M/d)])
+
+
+
+** Gaussian Mixture Model:
+A gaussian mixture model is a probabilistic model that assumes all the data points are generated from a mixture of a finite number of gaussian
+distributions with unknown parameters.
+One can think of mixture models as a generalization of K - means clustering to incorporate information about the covariance structure of the data
+as well as the centers of the latent Gaussians.
+
+
+EXPERIMENTS:
+-----------
+A. Data and Configurations:
+ Involves 9 classes of web documents including chinese articles:
+	- Automobile
+	- IT
+	- Finance
+	- Health
+	- Sports
+	- Tour
+	- Education
+	- Recruitment
+	- Culture
+	- Military
+
+Models used: a. Naive Bayes using weka
+	     b. K-NN using weka
+	     c. SVM using scikit learn
+
+Experiment 1 examines the average pooling and finds W2V based models outperform LDA based models significantly
+Experiment 2 uses only SVM and compares CSGMM, SSA (and a modified SSA +average pooling) and compares them to baseline W2V based and LDA based models
+
+key takeaways:
+ W2V beats LDA
+ SSA beats CSGMM and can even beat W2V with large enough M
+ Significance: Distribution of word vectors might be a better representation for a document
+W2V baseline is hard to beat unless more powerful modeling technique is applied such as the Bayesian SSA approach
+
+Modeling distribution of word vectors is a promising research direction for document classification and related applications
