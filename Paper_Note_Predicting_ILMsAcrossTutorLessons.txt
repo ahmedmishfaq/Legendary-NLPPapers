@@ -1,0 +1,41 @@
+*** Using existing performance data to adjust parameters for each individual student improves model fit, and leads to different practice
+recommendations.
+
+Definitions:
+=============
+1. BKT (Bayesian Knowledge Tracing):
+estimates the probability that a student knows each of the knowledge components (KC) in a tutor lession.
+2. IDW (Individual Difference weights):
+Three sets of best-fitting IDWs are computed from 31 KCs in lesson 1, 22 KCs in lesson 2, combined set of 53 KCs in lesson 1&2.
+
+Study description:
+=================
+* Students in this study worked through two successive topics in the genetic pathway analysis curriculum within the GCT 
+( Genetics Cognitive Tutor)
+--- topic 1: Gene Interaction
+       ---- examines how two genes can interact in different ways in controlling a single trait.
+--- topic 2: Gene Regulation
+       ---- 3 gene systems: 2 genes function together to control the expression of the third gene.
+
+** five student activities for each topic:
+--- 1. Reading instructional texts.
+--- 2. Taking a conceptual knowledge pretest.
+--- 3, 4. Complete two GCT lessons. two tutor lessons per topic.
+--- 5. Complete a problem solving post test.
+
+Data gathered from first two lessons are used to train the BKT parameters and predicting the performance in a third lesson.
+
+ 
+Findings/Conclusions:
+====================
+-- Directly applying the best-fitting IDWs from either of two prior lessons does not appreciably improve the goodness of fit for lesson 3,
+compared to the SBKT model (standard model without IDWs).
+
+-- Directly applying the best-fitting 
+
+-- IDWs can be successfully predicted without including pretest measures.(which is a valuable insight since pretests may not be available
+online)
+
+-- Reading time measures may reflect knowledge acquisition strategies as well as any knowledge acquired.
+
+  
