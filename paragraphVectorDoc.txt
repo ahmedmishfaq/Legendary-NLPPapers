@@ -1,0 +1,20 @@
+Paragraph Vector: An unsupervised framework that learns continuous distributed vector representations for pieces of texts.
+Paragraph vectors are unique among paragraphs while the word vectors are shared.
+
+Creating document vector: 
+==========================
+1. Form the weighted average of all the words in a document.
+	- loses the word order in the same way as the standard bag of words models do
+
+2. using parse tree to combine word vectors using matrix-vector operations
+	- works only on sentence level since it relies on parsing.
+
+Plus side of paragraph vector:
+==============================
+Applicable to text of any length: sentences/ paragraphs/ documents
+Does not require task-specific tuning of the word weighting function
+Does not rely on parse trees
+
+datasets used:
+Stanford TreeBank
+IMDB sentiment analysis
