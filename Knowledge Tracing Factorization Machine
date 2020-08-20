@@ -1,0 +1,44 @@
+Existing methods:
+=================
+1: temporal latent variable models
+2. factor analysis with temporal features
+
+FM (Factorization Machines) encompass several existing models as special cases:
+additive factor model
+performance factor model
+multidimensional IRT
+
+This FM is particularly useful for sparse data.. many students answering few of the many questions, which is a common phenomenon in MOOC settings
+
+
+Key findings from the experiments:
+=====================================
+1. Better to estimate a bias (?) for each item. not only skills --- which popular EDMs do not.
+2. Most existing models in EDM cannot handle side information such as multiple skills for one item.
+3. Side information improves performance more than increasing the latent dimension.
+
+Factor Analysis:
+================
+Learn common factors in data (for instance sparse matrix) in order to generalize observations (for instance matrix completion).
+
+logit p = log(p/1-p)
+
+Factor analysis with temporal feature to encode temporal features: 
+complement the data with temporal features such as simple counters.
+
+IRT (Item response theory)
+=========================
+
+logit p ij = theta i - d j
+theta i = ability of student i (student bias)
+d j = difficulty of question j (question bias)
+
+*** Wilson have shown that DKT, with too many parameters prone to overfitting, get outperformed by IRT even without temporal feature.
+
+
+**** VERY VERY IMPORTANT: IRT performs better than DKT so I can work on this!!! ******
+
+
+
+
+
